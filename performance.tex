@@ -1,0 +1,182 @@
+\subsection{Instrument simulators}
+\comment{Piacentini, Tomasi }
+Simulators are key elements for instrument design and for data analysis. 
+In the design phase, they allow to predict the scientific performance of the 
+instruments and the impact of systematic effects. In the data analysis phase, 
+they allow to run Montecarlo realizations of the observations, which are 
+necessary to estimate instrumental biases, measure transfer functions, 
+and to propagate uncertainties. 
+
+The instrument simulator of LSPE-SWIPE consists in a parallel Fortran-90 code
+which takes as input:
+\begin{itemize} 
+\item the number of detectors;
+\item the detectors position in the focal plane; 
+\item the detectors noise, in terms of NET and 1/f knee frequency;
+\item the mission starting date and duration;
+\item the angular response in the sky of each detector, as a 2d matrix; this
+is convolved in pixel space, in a radius specified also as input parameter;
+\item the HWP operation strategy (stepping, spinning, spinning rate, stepping period);
+\item the level of HWP synchronous systematic effects, as a signal in $\mu$K$_\text{CMB}$
+at the HWP spinning frequency and its harmonics;
+\item HWP angle offset or angle statistical uncertainty;
+\item timeline filter (high-pass, low-pass or band-pass);
+\item map-making algorithm details, as simple re-binning, or iterative
+destriping.
+\end{itemize}
+It generates in output:
+\begin{itemize} 
+\item timeline of each detector (optional);
+\item maps of each detector;
+\item map of combined detectors;
+\item coverage map;
+\item noise covariance 3x3 matrix for each observed pixel.
+\end{itemize}
+
+The instrument simulator of LSPE-STRIP is based on ... \comment{Tommasi}
+
+
+\subsection{Noise estimation}
+\comment{de Bernardis for SWIPE, including distribution of detector number in the bands}\\
+\comment{Tomasi/Mennella for STRIP}
+
+
+\subsection{Sky coverage}
+\comment{Discuss Swipe/Strip the best observation strategy to maximise overlap.
+How low can Strip go in zenithal angle to match Swipe coverage }
+
+\subsection{Component separation}
+\comment{Molinari, Pagano, Natoli, Baccigalupi, ...}
+Component separation is a mandatory step in the extraction of the CMB polarization 
+\citep[see e.g.][]{buzzelli_migliaccio2018}. In particular Galactic Dust and Synchrotron 
+emission are the most relevant foreground in polarization. 
+In this analysis we consider a template fitting technique, in which the 140 GHz channel
+is used to extract CMB polarization, while other channels are used as 
+foreground templates to remove foregrounds.
+For example, a high frequency channel map, $M_\text{HF}$, can be used 
+to trace and remove the dust signal, $M_\text{dust}$, from the 
+140\,GHz map, $M_\text{140}$.   
+The high frequency map contains dust and CMB signal:
+\begin{equation} 
+M_\text{HF} = M_\text{CMB} + M_\text{dust}
+\end{equation}
+while the 140 GHz channel contains CMB and a fraction $\alpha_\text{dust}$ of
+the dust in the $M_\text{HF}$ map:
+\begin{equation} 
+M_\text{140} = M_\text{CMB} + \alpha_\text{dust} \cdot M_\text{dust}
+\end{equation}
+The CMB map can be extracted as
+\begin{equation} 
+M_\text{CMB} = \frac{M_\text{140} - \alpha_\text{dust} \cdot M_\text{HF}}{1-\alpha_\text{dust}}
+\end{equation}
+The noise, $N_\text{CMB}$, in the CMB reconstructed map is then
+\begin{equation}
+N_\text{CMB}^2 = \left( \frac{1}{1-\alpha_\text{dust}} \right)^2 N_\text{140}^2 + \left( \frac{\alpha_\text{dust}}{1-\alpha_\text{dust}} \right)^2 N_\text{HF}^2
+\end{equation}
+where $N_\text{140}$ is the noise in the 140\,GHz map, and $N_\text{HF}$ is the noise in the high 
+frequency map. 
+The coefficient that multiplies the noise in the 140\,GHz map is always larger than 1;
+the coefficient that multiplies the noise in the HF map is smaller than 1 if $\alpha_\text{dust} < 0.5$, 
+larger otherwise. 
+In principle the $\alpha_\text{dust}$ coefficient may be different in different sky patches, but 
+we assume a constant value in this analysis. 
+\\
+\comment{In this paper we mainly focus on noise propagation from template fitting 
+technique; an independent paper can describe in detail the template fitting technique}\\
+\comment{Include a figure with LSPE frequency bands and spectra of the polarised 
+foregrounds } \\
+\comment{Dobbiamo decidere come trattare il sincrotrone. In prima approssimazione 
+possiamo scrivere che il rumore delle mappe a bassa frequenza, propagato usando 
+l'indice spettrale, \`e trascurabile rispetto al rumore della banda a 140 GHz. 
+Poi aggiungere un commento su possibile bias dovuto a curvatura dello spettro 
+del sincrotrone e spettro non uniforme. In modo da evidenziare l'importanza 
+dei canali a bassa frequenza. }
+
+\subsection{Likelihood}
+\comment{Pagano/Natoli}
+
+\section{Performance forecast, results}\label{sec:results}
+
+Instrumental configurations: SWIPE flight 8/15 days; SWIPE coverage; STRIP coverage.
+
+
+See table~\ref{tab:tauerrors} for result on the optical depth $\tau$.\comment{Pagano} 
+
+%
+%\begin{table}[htp]
+%\begin{center}
+%\begin{tabular}{l|c|c|c|c}
+%channels & v01 & v02 & v03 &v04 \\
+%\hline
+%140 & 0.0038 & 0.0043 & 0.0036 & 0.0040\\
+%140 c. 220 & 0.0044 & 0.0051 & 0.0042 & 0.0049\\
+%140 c. 240 & 0.0049 & 0.0060 & 0.0047 & 0.0056\\
+%140 c. 255 & 0.0048 & 0.0056 & 0.0045 & 0.0056\\
+%140 c. 270 & 0.0045 & 0.0052 & 0.0043 & 0.0049\\
+%140 c. 353 & 0.0042 & 0.0046 & 0.0040 & 0.0043\\
+%220 c. 240 & 0.0106 & 0.0138 & 0.0106 & 0.0136\\
+%220 c. 255 & 0.0104 & 0.0128 & 0.0097 & 0.0123\\
+%220 c. 270 & 0.0096 & 0.0116 & 0.0090 & 0.0116\\
+%220 c. 353 & 0.0088 & 0.0102 & 0.0084 & 0.0102\\
+%140 c. 353 + 220 c. 270  & 0.0042 & 0.0045 & 0.0039 & 0.0043\\
+%140 c. 220 240 353  & 0.0040 & 0.0045 & 0.0038 & 0.0044\\
+%140 c. 220 270 353  & 0.0039 & 0.0045 & 0.0039 & 0.0041\\\end{tabular}
+%\end{center}
+%\caption{$\tau$ 1-$\sigma$ errors obtained marginalizing over $\ln(10^{10}A_{\rm s})$. "c." means "cleaned by".}
+%\label{tab:tauerrors}
+%\end{table}%
+
+
+\begin{table}[htp]
+\begin{center}
+\begin{tabular}{l|c|c}
+channels & 8 days & 15 days \\
+\hline
+140 & 0.0037 & 0.0042\\
+140 c. 220 & 0.0048 & 0.0061\\
+140 c. 220x2 & 0.0045 & 0.0054\\
+140 c. 240 & 0.0053 & 0.0065\\
+140 c. 255 & 0.0051 & 0.0059\\
+140 c. 270 & 0.0046 & 0.0054\\
+140 c. 353 & 0.0041 & 0.0046\\
+140 c. 240 + 220 c. 353  & 0.0051 & 0.0061\\
+140 c. 255 + 220 c. 353  & 0.0047 & 0.0055\\
+140 c. 270 + 220 c. 353  & 0.0046 & 0.0054\\
+140 c. 353 + 220 cc. 270  & 0.0041 & 0.0044\\
+\end{tabular}
+\end{center}
+\caption{$\tau$ 1-$\sigma$ errors obtained marginalizing over $\ln(10^{10}A_{\rm s})$. "c." means "cleaned by".
+\comment{Scambiare intestazione colonne}}
+\label{tab:tauerrors}
+\end{table}%
+
+See table~\ref{tab:rerrors} for uncertainty estimation on the tensor to scalar ratio $r$.\comment{Pagano} 
+
+\begin{table}[htp]
+\begin{center}
+\begin{tabular}{l|c|c}
+channels & 8 days & 15 days \\
+\hline
+140 & 0.011 & 0.019\\
+140 c. 220 & 0.036 & 0.059\\
+140 c. 220x2 & 0.027 & 0.046\\
+140 c. 240 & 0.048 & 0.071\\
+140 c. 270 & 0.028 & 0.048\\
+140 c. 353 & 0.019 & 0.027\\
+140 c. 353 + 220 cc. 270  & 0.019 & 0.027\\
+\end{tabular}
+\end{center}
+\caption{Upper limit at 68\% C.L. on $r$. "c." means "cleaned by". 
+\comment{Scambiare intestazione colonne. I valori devono essere aggiornati. }}
+\label{tab:rerrors}
+\end{table}%
+
+~\\
+Spectral index? \comment{possiamo dire qualcosa?} \\ \\
+Low-ell anomaly \comment{Gruppuso/Natoli}\\ \\
+Birefringence \comment{Melchiorri++} \\ \\
+Other science: \\
+- non-gaussianity \comment{Matarrese?} , \\
+- galactic synchrotron \comment{Nicoletta}, \\
+- dust \comment{Masi}
+

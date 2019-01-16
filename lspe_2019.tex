@@ -1,0 +1,80 @@
+\documentclass{aa}
+\usepackage[varg]{txfonts}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+
+
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
+
+\newcommand{\comment}[1]{{\textcolor[rgb]{1, 0, 0}{[{\bf Comment}: #1]}}}
+
+
+\begin{document}
+
+
+
+\title{The Large Scale Polarization Explorer (LSPE) for CMB measurements: performance forecast}
+\author{The LSPE collaboration}
+\date{}
+
+\abstract{Context: }
+{We present the updated performance forecast of the Large Scale Polarization Explorer (LSPE),
+a program dedicated to the measurement of the polarization of the cosmic microwave
+background radiation (CMB). LSPE is composed of two instruments: LSPE-STRIP 
+(Survey TeneRIfe Polarimeter), a radiometer based telescope on the ground in Tenerife; 
+the LSPE-SWIPE (Short-Wavelength Instrument for 
+the Polarization Explorer) a bolometer based instrument to fly on a winter arctic stratospheric 
+long duration balloon.}
+{Methods}
+{Results}
+{The LSPE can reach a sensitivity in tensor-to-scalar ratio of $\sigma_r<0.013$.} 
+
+
+\keywords{
+Instrumentation: polarimeters;
+Cosmology: observations;
+Cosmology: early Universe
+}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+\input{introduction.tex}
+
+
+\section{The instruments}\label{sec:instruments}
+The LSPE is composed by two separated instrument. 
+\\ \comment{Add a table with STRIP+SWIPE basic instrumental parameters: bands, bandwidths, 
+resolution, sensitivity, integration time, number of detectors, ....}
+
+\subsection{LSPE-STRIP}
+\input{strip.tex}
+
+\subsection{LSPE-SWIPE}
+\input{swipe.tex}
+
+\section{Performance forecast, methods}\label{sec:methods}
+\input{performance.tex}
+
+\section{Systematics effects and calibration}\label{sec:systematics}
+\input{systematics.tex}
+
+\section{Conclusion}\label{sec:conclusion}
+\input{conclusion.tex}
+
+ \begin{acknowledgements} 
+ LSPE is granted by .... ASI, INFN, ...
+\end{acknowledgements}
+
+\bibliographystyle{aa} % style aa.bst
+\bibliography{biblio} % your references biblio.bib
+
+\comment{Per i riferimenti bibliografici, input da tutti. Possibilmente bibtex da inserire nel file biblio.bib, oppure DOI, o link ADS}
+
+
+\end{document}

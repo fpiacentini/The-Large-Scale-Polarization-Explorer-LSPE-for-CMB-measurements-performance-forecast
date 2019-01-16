@@ -1,0 +1,90 @@
+\comment{Direi che un discorso completo sulle sistematiche richiederebbe un altro articolo. Troppi aspetti da trattare.
+Qui ci possiamo limitare a commentare sulle tecniche di mitigazione e di calibrazione che intendiamo utilizzare}
+
+\comment{Piacentini, Natoli, Bersanelli, Tomasi, Columbro, de Gasperis}
+
+\subsection{LSPE-STRIP systematic effects and calibration}
+\comment{Bersanelli, Tomasi, Mennella}
+
+
+\subsection{LSPE-SWIPE systematic effects and calibration}
+\comment{de Bernardis, Piacentini, Natoli, de Gasperis, Columbro, Lamagna}
+
+\subsubsection{Instrument requirement}
+
+\comment{From SWIPE Program requirement document. Questa parte pu\`o essere
+ridotta, aggiungendo referenze a vari articoli in letteratura, inclusi Buzzelli et al., proceeding 
+di Columbro 2018}
+
+LSPE-SWIPE is designed to minimize instrumental polarization. This is the spurious signal resulting
+from the measurement of unpolarized radiation. 
+In the case of CMB, the amount of unpolarized radiation coming from
+the sky is overwhelming with respect to the polarized signal, minimizing instrumental
+polarization is the most important driver of instrument design. 
+The requirement is that the
+maximum acceptable level of instrumental polarization is 0.2\%. 
+In this way we will get a constant
+polarized signal lower than 6\,mK from the unpolarized background, while from CMB anisotropy we
+will get at most 0.2\,$\mu$K spurious polarization, correlated to temperature fluctuations (even less at large
+angular scales). The constant signal is treated as an offset in the data analysis, whose stability depends
+on the stability of the gain of the electronics and of the responsivity of the detectors, and is not
+synchronous with the observed sky. 
+Instrumental polarization is reduced during system design using an
+optical system close to on-axis, and avoiding mirrors in favor of lenses. The main design choice here
+is to have the polarization modulator as the first optical elements in the system, thus relaxing
+significantly the requirements on the following optical components.
+
+The second parameter to be considered is cross-polarization. Cross-polarization is defined as the
+response of a polarimeter to an input signal polarized in direction orthogonal to the nominal
+polarimeter direction. Cross-polarization results in leakage of E-modes into B-modes. 
+%Crosspol can be effectively mitigated by means of a precise calibration and data analysis, as confirmed by our
+%experience in the data analysis of BOOMERanG and Planck-HFI, where levels of cross-polarization
+%around 10% were managed successfully. 
+Our requirement is that the maximum acceptable level of cross-polarization is below 2\%. 
+This is achieved again by means of an accurate optical design.
+
+The third parameter to be considered is the ellipticity of the main beam (detector angular response 
+in the sky). Step rotation or spinning of
+the Half Wave Plate allows to observe the same sky region with the same beam orientation, and
+different polarimeter orientation. This strongly mitigates the ellipticity requirement, and differential 
+ellipticity among different detectors. 
+%Previous experience shows that an acceptable level of ellipticity is below 2\%. 
+%The main way to achieve this
+%is to use an on-axis system and not to use the marginal regions of the focal plane. In our baseline the
+%used area of the focal plane is only the central 25\% of the area of the entrance pupil. However, the
+%ellipticity in the beam is mainly dictated by the multimode propagation in the horns instead of
+%aberration effects along the focal plane. So a smarter optical configuration is under study, which
+%should allow to re-gain a larger fraction of the area.
+
+Correct measurement of the angles of the polarimeters is crucial to avoid leakage from E-modes into
+B-modes, and to avoid contamination in the measurement of fundamental physics effects such as
+cosmic birifringence. In this contest, our system is characterized by the presence of a single, large
+wire grid polarizer, defining the reference system for polarization measurements. With this design
+the system is similar to an ideal polarimeter, and the angle of the single large wire grid polarimeter
+can be accurately measured. We set the requirement for the polarimeter angle measurement to
+0.2 degrees. This will improve by at least a factor 10 with respect to e.g. Planck-HFI, where the
+polarization axis is defined by the orientation of PSBs, much more difficult to measure due to their
+small dimensions \citep{rosset2010}.
+
+Spectral matching among detectors 
+has been historically a problem for instruments without a polarization modulator, just comparing
+two independent measurements of the orthogonal polarization components. 
+In LSPE-SWIPE we use a Stokes polarimeter, where the same detector measures both polarizations,
+alternated by means of a rotating half-wave plate. In this configuration the most important requirement is
+that the waveplate has high modulation efficiency over the detection bandwidth of the focal plane it
+serves. In our system a single waveplate covers all the bands from 120 to 250 GHz. This
+requires 70\% bandwidth for the waveplate, a goal certainly reachable with significant
+accuracy, by means of metamaterials \citep[see][]{Pisano:06}.
+%In addition, band-defining filters and blocking filters should not produce a significant background on
+%the detectors and should not allow any leak of high frequency radiation (up to the UV band). We will
+%use the same requirements as in the Planck-HFI instrument.
+
+\subsubsection{Half-Wave Plate synchronous effects}
+\comment{Columbro }
+
+\citep[see][]{ritacco2017}
+
+\subsubsection{LSPE-SWIPE calibration }
+\comment{de Bernardis, Piacentini, Natoli, de Gasperis, Columbro, Lamagna}
+
+
