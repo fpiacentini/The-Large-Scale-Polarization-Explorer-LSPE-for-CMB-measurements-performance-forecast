@@ -55,31 +55,56 @@ is used to extract CMB polarization, while other channels are used as
 foreground templates to remove foregrounds.
 For example, a high frequency channel map, $M_\text{HF}$, can be used 
 to trace and remove the dust signal, $M_\text{dust}$, from the 
-140\,GHz map, $M_\text{140}$.   
+140\,GHz map, $M_\text{140}$.
 The high frequency map contains dust and CMB signal:
 \begin{equation} 
 M_\text{HF} = M_\text{CMB} + M_\text{dust}
 \end{equation}
-while the 140 GHz channel contains CMB and a fraction $\alpha_\text{dust}$ of
-the dust in the $M_\text{HF}$ map:
+Similarly, a low frequency map, $M_\text{LF}$, can be used to 
+trace and remove the synchrotron signal $M_\text{sync}$. 
+The low frequency map contains synchrotron and CMB signal:
 \begin{equation} 
-M_\text{140} = M_\text{CMB} + \alpha_\text{dust} \cdot M_\text{dust}
+M_\text{LF} = M_\text{CMB} + M_\text{sync}
+\end{equation}.
+The 140 GHz channel contains CMB, a fraction $\alpha_\text{dust}$ of
+the dust in the $M_\text{HF}$ map, and a fraction $\alpha_\text{sync}$ of
+the synchrotron signal in the $M_\text{LF}$ 
+\begin{equation} 
+M_\text{140} = M_\text{CMB} + 
+\alpha_\text{dust} \cdot M_\text{dust} +
+\alpha_\text{sync} \cdot M_\text{sync}
 \end{equation}
 The CMB map can be extracted as
 \begin{equation} 
-M_\text{CMB} = \frac{M_\text{140} - \alpha_\text{dust} \cdot M_\text{HF}}{1-\alpha_\text{dust}}
+M_\text{CMB} = \frac{M_\text{140} - 
+\alpha_\text{dust} \cdot M_\text{HF} - 
+\alpha_\text{sync} \cdot M_\text{LF}
+}{1-\alpha_\text{dust}-\alpha_\text{sync}}
 \end{equation}
 The noise, $N_\text{CMB}$, in the CMB reconstructed map is then
 \begin{equation}
-N_\text{CMB}^2 = \left( \frac{1}{1-\alpha_\text{dust}} \right)^2 N_\text{140}^2 + \left( \frac{\alpha_\text{dust}}{1-\alpha_\text{dust}} \right)^2 N_\text{HF}^2
+N_\text{CMB}^2 = 
+%\left( 
+%\frac{1}{1-\alpha_\text{dust}-\alpha_\text{sync}} \right)^2 N_\text{140}^2 
+%+ \left( \frac{\alpha_\text{dust}}{1-\alpha_\text{dust}-\alpha_\text{sync}} %\right)^2 N_\text{HF}^2
+%+ \left( \frac{\alpha_\text{sync}}{1-\alpha_\text{dust}-\alpha_\text{sync}} \right)^2 N_\text{LF}^2
+\frac{N_{140}^2 +
+\alpha_\text{dust}^2 N^2_\text{HF} +
+\alpha_\text{sync}^2 N^2_\text{LF} 
+}
+{(1-\alpha_\text{dust}-\alpha_\text{sync})^2}
 \end{equation}
-where $N_\text{140}$ is the noise in the 140\,GHz map, and $N_\text{HF}$ is the noise in the high 
+where $N_\text{140}$ is the noise in the 140\,GHz map, $N_\text{HF}$ is the noise in the high 
+frequency map, and $N_\text{HF}$ is the noise in the low 
 frequency map. 
 The coefficient that multiplies the noise in the 140\,GHz map is always larger than 1;
-the coefficient that multiplies the noise in the HF map is smaller than 1 if $\alpha_\text{dust} < 0.5$, 
-larger otherwise. 
-In principle the $\alpha_\text{dust}$ coefficient may be different in different sky patches, but 
-we assume a constant value in this analysis. 
+the coefficients that multiplies the noise in the HF and LF maps 
+can be larger or smaller then 1.
+%is smaller than 1 if $\alpha_\text{dust} +\alpha_\text{sync}  < 0.5$, 
+%larger otherwise. 
+In principle the $\alpha_\text{dust}$ and $\alpha_\text{sync}$ coefficients 
+may be different in different sky patches, but 
+we assume constant values in this analysis. 
 \\
 \comment{In this paper we mainly focus on noise propagation from template fitting 
 technique; an independent paper can describe in detail the template fitting technique}\\
